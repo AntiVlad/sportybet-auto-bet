@@ -8,9 +8,9 @@ const prompt = prompts();
 let username = prompt("Enter your phone number(70xxxxxxxx) ");
 let pswd = prompt("Enter your password ");
 if (username || pswd !== "") {
-  console.log('OK, Opening chrome instance')
+  console.log('OK, Opening chrome instance...')
 } else {
-  throw new error("You have to enter your details")
+  throw new error("You have to enter your details.")
 }
 (async () => {
   const browser = await puppeteer.launch({ headless: false, executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' });
