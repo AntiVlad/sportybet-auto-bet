@@ -1,0 +1,1 @@
+Booking codes go in here. Replace this text with the booking codes separated by commas(BCJI223,BCW3OD,BC38DN,FNIWID)
