@@ -8,7 +8,7 @@ const prompt = prompts();
 let username = prompt("Enter your phone number(70xxxxxxxx) ");
 let pswd = prompt("Enter your password ");
 if (username || pswd !== "") {
-  console.log('OK')
+  console.log('OK, Opening chrome instance')
 } else {
   throw new error("You have to enter your details")
 }
@@ -24,7 +24,7 @@ if (username || pswd !== "") {
   await page.type('input[name="phone"]', username);
   await page.type('input[name="psd"]', pswd);
   // await page.waitForTimeout(10000);
-  console.log("Logged in");
+  
   {
     const targetPage = page;
     const element = await waitForSelectors([["aria/Login"],["#j_page_header > div.m-top-wrapper > div > div.m-logo-bar > div.m-login-bar > div.m-opt > div.m-psd-wrapper > div.m-psd > button"]], targetPage, { timeout, visible: true });
@@ -35,7 +35,8 @@ if (username || pswd !== "") {
         y: 13,
       },
     });
-}
+  }
+  console.log("Logged in");
   // await page.click('#j_page_header > div.m-top-wrapper > div > div.m-logo-bar > div.m-login-bar > div.m-opt > div.m-psd-wrapper > div.m-psd > button');
 
   const data = fs.readFileSync('codes.txt', 'utf8');
@@ -48,10 +49,10 @@ if (username || pswd !== "") {
     await page.waitForSelector('#j_betslip > div.m-betslips > div.m-betslip-search > div.m-opt-wrapper > div.m-input-wrapper > span > input');
 
     await page.type('#j_betslip > div.m-betslips > div.m-betslip-search > div.m-opt-wrapper > div.m-input-wrapper > span > input', betCode);
-    console.log("Typed code");
+    // console.log("Typed code");
 
     await page.click('#j_betslip > div.m-betslips > div.m-betslip-search > div.m-opt-wrapper > button');
-    console.log("Loaded code");
+    // console.log("Loaded code");
 
     try {
 
@@ -76,7 +77,7 @@ if (username || pswd !== "") {
       await page.keyboard.up('Control');
       await page.keyboard.press('Backspace');
       await page.type('#j_stake_0 > span > input', stake);
-      console.log("Input stake");
+      // console.log("Input stake");
 
       await page.waitForTimeout(3000);
     {
@@ -90,7 +91,7 @@ if (username || pswd !== "") {
           },
         });
     }
-    console.log("Accept/Place Bet 1")
+    // console.log("Accept/Place Bet 1")
     await page.waitForTimeout(2000);
     {
         const targetPage = page;
@@ -103,7 +104,7 @@ if (username || pswd !== "") {
           },
         });
     }
-    console.log("Accept/Place Bet 2")
+    // console.log("Accept/Place Bet 2")
 
     {
         const targetPage = page;
@@ -116,7 +117,7 @@ if (username || pswd !== "") {
           },
         });
     }
-    console.log("Confirm")
+    // console.log("Confirm")
 
     await page.waitForTimeout(3000);
 
@@ -131,7 +132,7 @@ if (username || pswd !== "") {
           },
         });
     }
-    console.log("Okay Dialog")
+    // console.log("Okay Dialog")
 
     console.log(`Staked ${betCode}`);
   
