@@ -56,7 +56,7 @@ if (username || pswd !== "") {
     try {
 
       await Promise.race([
-        page.waitForSelector('#esDialog0 > div.es-dialog.m-dialog > div > div > div > div.m-pop-main > div.m-btn-wrapper.m-ok-wrap > button', { timeout: 10000 }), // Adjust the timeout as needed
+        page.waitForSelector('#esDialog0 > div.es-dialog.m-dialog > div > div > div > div.m-pop-main > div.m-btn-wrapper.m-ok-wrap > button', { timeout: 10000 }), 
         new Promise((resolve, reject) => setTimeout(resolve, 10000)) 
       ]);
 
@@ -138,7 +138,7 @@ if (username || pswd !== "") {
     } catch (error) {
       console.log(`Something went wrong with ${betCode}. Skipping...`);
       await page.reload();
-      continue; // Skip the rest of the loop and proceed to the next bet code
+      continue; 
     }
   }
 
