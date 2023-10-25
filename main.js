@@ -12,8 +12,16 @@ if (username || pswd !== "") {
 } else {
   throw new error("You have to enter your details.")
 }
+
+var location = prompt("Enter your phone chrome install location(default :C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe ) ");
+let defaultLocation = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+if(location===""){
+ location = defaultLocation
+}
+console.log(location)
+const stake = prompt("Enter your stake ");
 (async () => {
-  const browser = await puppeteer.launch({ headless: false, executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' });
+  const browser = await puppeteer.launch({ headless: false, executablePath: location });
   const page = await browser.newPage();
 
   await page.setDefaultNavigationTimeout(0);
@@ -41,7 +49,6 @@ if (username || pswd !== "") {
 
   const data = fs.readFileSync('codes.txt', 'utf8');
   const values = data.split(',').map((value) => value.trim());
-  const stake = "10";
 
   for (let i = 0; i < values.length; i++) {
     const betCode = values[i];
@@ -288,4 +295,3 @@ async function waitForFunction(fn, timeout) {
   }
   throw new Error('Timed out');
 }
-
