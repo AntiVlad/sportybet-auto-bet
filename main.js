@@ -105,8 +105,15 @@ const prompts = require('prompts');
       await page.click('button[class="af-button af-button--primary"]');
       const elements = await page.$$('button[class="af-button af-button--primary"]');
       const confirm = elements[1];
-      await confirm.click(); //Confirm
-
+      try{
+        await confirm.click(); //Confirm
+      }catch(e){
+        await page.click('span[data-cms-key="remove_all"]');
+        await page.waitForTimeout(1500);
+        await page.click('a[data-ret="1"]');
+        await page.waitForTimeout(1000);
+        continue main;
+      }
       await page.click('button[data-action="close"]');
       console.log(`Staked ${betCode}`);
     } catch (error) {
