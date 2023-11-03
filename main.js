@@ -105,8 +105,8 @@ const prompts = require('prompts');
       console.log(`Staked ${betCode}`);
     } catch (error) {
       console.log(error)
-      console.log(`Something went wrong with ${betCode}. Skipping...`);
       try{
+        console.log(`Something went wrong with ${betCode}. Skipping...`);
         await page.click('span[data-cms-key="remove_all"]');
         await page.waitForTimeout(1500);
         await page.click('a[data-ret="1"]');
