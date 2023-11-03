@@ -59,7 +59,7 @@ const prompts = require('prompts');
 
   console.log('Logged in');
 
-  for (let i = 0; i < values.length; i++) {
+  main: for (let i = 0; i < values.length; i++) {
     try {
       await Promise.race([
         page.waitForSelector('#esDialog0 > div.es-dialog.m-dialog > div > div > div > div.m-pop-main > div.m-btn-wrapper.m-ok-wrap > button', { timeout: 10000 }),
@@ -88,6 +88,12 @@ const prompts = require('prompts');
         await stakeBox.type(stake);
     }else{
         console.log("stakebox not found")
+        await page.click('span[data-cms-key="remove_all"]');
+        await page.waitForTimeout(1500);
+        await page.click('a[data-ret="1"]');
+        await page.waitForTimeout(1000);
+        continue main;
+        
     }
 
 
@@ -99,11 +105,8 @@ const prompts = require('prompts');
       await page.click('button[class="af-button af-button--primary"]');
       const elements = await page.$$('button[class="af-button af-button--primary"]');
       const confirm = elements[1];
-      try{
-        await confirm.click(); //Confirm
-      }catch(e){
-        continue;
-      }
+      await confirm.click(); //Confirm
+
       await page.click('button[data-action="close"]');
       console.log(`Staked ${betCode}`);
     } catch (error) {
