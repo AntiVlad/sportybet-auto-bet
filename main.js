@@ -99,8 +99,11 @@ const prompts = require('prompts');
       await page.click('button[class="af-button af-button--primary"]');
       const elements = await page.$$('button[class="af-button af-button--primary"]');
       const confirm = elements[1];
-      await confirm.click(); //Confirm
-
+      try{
+        await confirm.click(); //Confirm
+      }catch(e){
+        continue;
+      }
       await page.click('button[data-action="close"]');
       console.log(`Staked ${betCode}`);
     } catch (error) {
@@ -118,6 +121,6 @@ const prompts = require('prompts');
       continue;
     }
   }
-
+  console.log("Done")
   await browser.close();
 })();
