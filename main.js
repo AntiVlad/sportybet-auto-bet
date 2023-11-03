@@ -43,7 +43,7 @@ const prompts = require('prompts');
   const context = await browser.newContext();
   const page = await context.newPage();
 
-  const data = fs.readFileSync('codes.txt', 'utf8');
+  const data = fs.readFileSync('betcodes.txt', 'utf8');
   const values = data.split(',').map((value) => value.trim());
 
   await page.goto('https://www.sportybet.com');
@@ -60,15 +60,16 @@ const prompts = require('prompts');
   console.log('Logged in');
 
   for (let i = 0; i < values.length; i++) {
-    const betCode = values[i];
-    const betUrl = `https://www.sportybet.com/?shareCode=${betCode}&c=ng`;
-    await page.goto(betUrl);
-    await page.click('#j_betslip > div.m-betslips > div.m-list-nav > div > div > div:nth-child(2)'); //Change to multiple
     try {
-        await Promise.race([
-          page.waitForSelector('#esDialog0 > div.es-dialog.m-dialog > div > div > div > div.m-pop-main > div.m-btn-wrapper.m-ok-wrap > button', { timeout: 10000 }),
-          new Promise((resolve) => setTimeout(resolve, 5000)),
-        ]);
+      await Promise.race([
+        page.waitForSelector('#esDialog0 > div.es-dialog.m-dialog > div > div > div > div.m-pop-main > div.m-btn-wrapper.m-ok-wrap > button', { timeout: 10000 }),
+        new Promise((resolve) => setTimeout(resolve, 5000)),
+      ]);
+      const betCode = values[i];
+      const betUrl = `https://www.sportybet.com/?shareCode=${betCode}&c=ng`;
+      await page.goto(betUrl);
+      await page.click('#j_betslip > div.m-betslips > div.m-list-nav > div > div > div:nth-child(2)'); //Change to multiple
+    
     //   await page.click('#j_betslip > div.m-betslips > div.m-list-nav > div > div > div:nth-child(1)');
     //   await page.click('//*[@id="j_stake_0"]/span/input');
     //   await page.keyboard.down('Control');
